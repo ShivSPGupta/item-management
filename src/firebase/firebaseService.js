@@ -6,7 +6,6 @@ import {
   getDocs
 } from "firebase/firestore";
 
-// ✅ Replace these with your actual Firebase project config
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "item-management-c5ce5.firebaseapp.com",
@@ -20,12 +19,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔹 Add item to Firestore
+// Add item to Firestore
 export const addItemToFirestore = async (item) => {
   await addDoc(collection(db, "items"), item);
 };
 
-// 🔹 Get all items from Firestore
+// Get all items from Firestore
 export const getAllItems = async () => {
   const snapshot = await getDocs(collection(db, "items"));
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
